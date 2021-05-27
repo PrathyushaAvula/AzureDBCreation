@@ -63,7 +63,7 @@
             "tier": "Standard"
           },
            "dependsOn": [
-            "[variables('sqlServerName')]"
+            "resourceId('Microsoft.Sql/servers/',variables('sqlServerName'))]"
           ]
         }
       ]
