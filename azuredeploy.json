@@ -61,7 +61,7 @@
             "tier": "Standard"
           },
           "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', concat(parameters('serverName')))]"
+            "[resourceId('Microsoft.Sql/servers', 'sqlserverdss'))]"
           ]
         }
       ]
