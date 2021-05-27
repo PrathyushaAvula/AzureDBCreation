@@ -37,7 +37,7 @@
     }
   },
   "variables": {
-      "sqlServerName": "[concat('sqlserver','dss')]",
+      "sqlServerName": "sqlserverdss",
   },
   "resources": [
     {
