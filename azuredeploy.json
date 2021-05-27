@@ -37,16 +37,16 @@
     }
   },
   "variables": {
-      "sqlservername" : "[concat('sqlserver', uniqueString(resourceGroup().Id))]"
+      "sqlServerName": "[concat('sqlserver', uniqueString(subscription().id, resourceGroup().id))]",
   },
   "resources": [
     {
       "type": "Microsoft.Sql/servers",
       "apiVersion": "2020-02-02-preview",
-      "name": "[parameters('serverName')]",
+      "name": "[variables('sqlServerName')]",
       "location": "[parameters('location')]",
       "tags": {
-        "displayName": "sqlServer"
+        "displayName": "SqlServer"
       },
       "properties": {
         "administratorLogin": "[parameters('administratorLogin')]",
@@ -62,8 +62,8 @@
             "name": "Standard",
             "tier": "Standard"
           },
-          "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', variables('sqlservername'))]"
+           "dependsOn": [
+            "[variables('sqlServerName')]"
           ]
         }
       ]
