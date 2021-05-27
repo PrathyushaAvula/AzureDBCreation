@@ -56,7 +56,7 @@
         {
           "type": "databases",
           "apiVersion": "2020-08-01-preview",
-          "name": "[parameters('sqlDBName')]",
+          "name": "[parameters('TenancyName')]",
           "location": "[parameters('location')]",
           "sku": {
             "name": "Standard",
