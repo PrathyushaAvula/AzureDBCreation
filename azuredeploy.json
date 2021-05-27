@@ -30,18 +30,19 @@
     }
   },
   "variables": {},
-  "resources": [
+ "resources": [
+        {
           "type": "databases",
-        "apiVersion": "2020-08-01-preview",
-        "name": "[parameters('sqlDBName')]",
-        "location": "[parameters('location')]",
-        "sku": {
-          "name": "Standard",
-          "tier": "Standard"
-        },
-        "dependsOn": [
-          "[resourceId('Microsoft.Sql/servers', concat(parameters('serverName')))]"
+          "apiVersion": "2020-08-01-preview",
+          "name": "[parameters('sqlDBName')]",
+          "location": "[parameters('location')]",
+          "sku": {
+            "name": "Standard",
+            "tier": "Standard"
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', concat(parameters('serverName')))]"
+          ]
+        }
       ]
-    }
-  ]
 }
