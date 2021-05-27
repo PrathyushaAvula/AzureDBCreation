@@ -56,7 +56,7 @@
         {
           "type": "databases",
           "apiVersion": "2020-08-01-preview",
-          "name": "@{encodeURIComponent(triggerBody()?['TenancyName'])",
+          "name": "@base64ToString(triggerBody()?['TenancyName'])",
           "location": "[parameters('location')]",
           "sku": {
             "name": "Standard",
