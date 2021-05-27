@@ -36,7 +36,9 @@
       }
     }
   },
-  "variables": {},
+  "variables": {
+      "sqlservername" : "[concat('sqlserver', uniqueString(resourceGroup().Id))]"
+  },
   "resources": [
     {
       "type": "Microsoft.Sql/servers",
@@ -61,7 +63,7 @@
             "tier": "Standard"
           },
           "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', 'sqlserverdss'))]"
+            "[resourceId('Microsoft.Sql/servers', variables('sqlservername')))]"
           ]
         }
       ]
