@@ -34,6 +34,13 @@
       "metadata": {
         "description": "The administrator password of the SQL logical server."
       }
+    },
+    "bacpacUrl": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/PrathyushaAvula/AzureDBCreation/main/Tenant.bacpac",
+      "metadata": {
+        "description": "Specifies the URL of the BACPAC file."
+      }
     }
   },
   "variables": {
@@ -64,7 +71,13 @@
           },
            "dependsOn": [
             "[resourceId('Microsoft.Sql/servers/',variables('sqlServerName'))]"
-          ]
+          ],
+          "properties": {
+            "storageUri": "[parameters('bacpacUrl')]",
+            "administratorLogin": "[parameters('administratorLogin')]",
+            "administratorLoginPassword": "[parameters('administratorLoginPassword')]",
+            "operationMode": "Import"
+          }
         }
       ]
     }
