@@ -37,7 +37,6 @@
     },
     "bacpacUrl": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/PrathyushaAvula/AzureDBCreation/main/Tenant.bacpac",
       "metadata": {
         "description": "Specifies the URL of the BACPAC file."
       }
