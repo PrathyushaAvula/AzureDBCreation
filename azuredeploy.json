@@ -77,7 +77,7 @@
           "apiVersion": "2014-04-01",
           "name": "Import",
           "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers/databases', parameters('sqlDBName'))]"
+            "[resourceId('Microsoft.Sql/servers/databases',variables('sqlServerName'), parameters('sqlDBName'))]"
           ],
           "properties": {
             "storageUri": "[parameters('bacpacUrl')]",
