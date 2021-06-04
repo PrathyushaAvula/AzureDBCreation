@@ -23,7 +23,7 @@
         "description": "Location for all resources."
       }
     },
-    "sqlserverlocation": {
+    "sqlServerLocation": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
       "metadata": {
@@ -63,7 +63,7 @@
       "type": "Microsoft.Sql/servers",
       "apiVersion": "2020-02-02-preview",
       "name": "[variables('sqlServerName')]",
-      "location": "[parameters('sqlserverlocation')]",
+      "location": "[parameters('sqlServerLocation')]",
       "tags": {
         "displayName": "SqlServer"
       },
