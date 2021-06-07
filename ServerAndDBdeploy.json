@@ -80,7 +80,7 @@
               "endIpAddress": "0.0.0.0"
             }
           }
-        ],
+        ]
        },
        {
             "type": "databases",
