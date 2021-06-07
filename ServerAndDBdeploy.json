@@ -46,6 +46,13 @@
       "metadata": {
         "description": "Specifies the URL of the BACPAC file."
       }
+    },
+    "allowAzureIPs": {
+        "defaultValue": true,
+        "type": "bool",
+        "metadata": {
+            "description": "Allow Azure services to access server."
+        }
     }
   },
   "variables": {},
