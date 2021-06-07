@@ -88,6 +88,10 @@
         "dependsOn": [
             "[resourceId('Microsoft.Sql/servers', concat(parameters('serverName')))]"
         ],
+          "properties": {
+          "administratorLogin": "[parameters('administratorLogin')]",
+          "administratorLoginPassword": "[parameters('administratorLoginPassword')]"
+        },
         "resources": [
             {
             "type": "extensions",
@@ -95,7 +99,7 @@
             "name": "Import",
 
             "dependsOn": [
-                "[resourceId('Microsoft.SQL/servers/databases', parameters('serverName'), parameters('sqlDBName'))]"
+                "[resourceId('Microsoft.Sql/servers/databases', parameters('serverName'), parameters('sqlDBName'))]"
             ],
             "properties": {
                 "storageKeyType": "StorageAccessKey",
