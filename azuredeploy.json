@@ -34,19 +34,15 @@
       "metadata": {
         "description": "The administrator password of the SQL logical server."
       }
-    },
-  "variables": {
-      "sqlServerName": "sqlserverdss",
+    }
   },
+  "variables": {},
   "resources": [
     {
       "type": "Microsoft.Sql/servers",
       "apiVersion": "2020-02-02-preview",
-      "name": "[variables('sqlServerName')]",
+      "name": "[parameters('serverName')]",
       "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "SqlServer"
-      },
       "properties": {
         "administratorLogin": "[parameters('administratorLogin')]",
         "administratorLoginPassword": "[parameters('administratorLoginPassword')]"
@@ -61,14 +57,11 @@
             "name": "Standard",
             "tier": "Standard"
           },
-           "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers/',variables('sqlServerName'))]"
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', concat(parameters('serverName')))]"
           ]
         }
       ]
     }
   ]
 }
-
-
-
