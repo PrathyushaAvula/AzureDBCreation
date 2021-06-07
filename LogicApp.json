@@ -1,0 +1,290 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "For_each": {
+                "actions": {
+                    "Condition": {
+                        "actions": {
+                            "Condition_2": {
+                                "actions": {
+                                    "Create_or_update_a_template_deployment_3": {
+                                        "inputs": {
+                                            "body": {
+                                                "properties": {
+                                                    "mode": "Incremental",
+                                                    "parameters": {
+                                                        "administratorLogin": {
+                                                            "value": "DSS_ADMIN"
+                                                        },
+                                                        "administratorLoginPassword": {
+                                                            "value": "Dddd@123"
+                                                        },
+                                                        "bacpacUrl": {
+                                                            "value": "https://tenantdb.blob.core.windows.net/database/tenantdb.bacpac"
+                                                        },
+                                                        "location": {
+                                                            "value": "@triggerBody()?['REGION']"
+                                                        },
+                                                        "serverName": {
+                                                            "value": "sqlserverdss@{triggerBody()?['REGION']}"
+                                                        },
+                                                        "sqlDBName": {
+                                                            "value": "@triggerBody()?['TenancyName']"
+                                                        },
+                                                        "storageAccountKey": {
+                                                            "value": "3Y+rFUClSsnG/zW0zlLrLZX4Bd03fK1HYl3Y42i9H9isrgRE8IwEtJsJiVfX6meAhMN6uoPheRu3cOYQrKL3hw=="
+                                                        }
+                                                    },
+                                                    "templateLink": {
+                                                        "uri": "https://raw.githubusercontent.com/PrathyushaAvula/AzureDBCreation/main/DBdeploy.json"
+                                                    }
+                                                }
+                                            },
+                                            "host": {
+                                                "connection": {
+                                                    "name": "@parameters('$connections')['arm']['connectionId']"
+                                                }
+                                            },
+                                            "method": "put",
+                                            "path": "/subscriptions/@{encodeURIComponent('65dc4860-69eb-499d-9162-2a0d5553c39d')}/resourcegroups/@{encodeURIComponent('Envision')}/providers/Microsoft.Resources/deployments/@{encodeURIComponent(triggerBody()?['Name'])}",
+                                            "queries": {
+                                                "wait": true,
+                                                "x-ms-api-version": "2016-06-01"
+                                            }
+                                        },
+                                        "runAfter": {},
+                                        "type": "ApiConnection"
+                                    }
+                                },
+                                "else": {
+                                    "actions": {
+                                        "Create_or_update_a_template_deployment": {
+                                            "inputs": {
+                                                "body": {
+                                                    "properties": {
+                                                        "mode": "Incremental",
+                                                        "parameters": {
+                                                            "administratorLogin": {
+                                                                "value": "DSS_ADMIN"
+                                                            },
+                                                            "administratorLoginPassword": {
+                                                                "value": "Dddd@123"
+                                                            },
+                                                            "bacpacUrl": {
+                                                                "value": "https://tenantdb.blob.core.windows.net/database/tenantdb.bacpac"
+                                                            },
+                                                            "location": {
+                                                                "value": "@triggerBody()?['REGION']"
+                                                            },
+                                                            "serverName": {
+                                                                "value": "sqlserverdss"
+                                                            },
+                                                            "sqlDBName": {
+                                                                "value": "@triggerBody()?['TenancyName']"
+                                                            },
+                                                            "storageAccountKey": {
+                                                                "value": "3Y+rFUClSsnG/zW0zlLrLZX4Bd03fK1HYl3Y42i9H9isrgRE8IwEtJsJiVfX6meAhMN6uoPheRu3cOYQrKL3hw=="
+                                                            }
+                                                        },
+                                                        "templateLink": {
+                                                            "uri": "https://raw.githubusercontent.com/PrathyushaAvula/AzureDBCreation/main/DBdeploy.json"
+                                                        }
+                                                    }
+                                                },
+                                                "host": {
+                                                    "connection": {
+                                                        "name": "@parameters('$connections')['arm']['connectionId']"
+                                                    }
+                                                },
+                                                "method": "put",
+                                                "path": "/subscriptions/@{encodeURIComponent('65dc4860-69eb-499d-9162-2a0d5553c39d')}/resourcegroups/@{encodeURIComponent('Envision')}/providers/Microsoft.Resources/deployments/@{encodeURIComponent(triggerBody()?['Name'])}",
+                                                "queries": {
+                                                    "wait": true,
+                                                    "x-ms-api-version": "2016-06-01"
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "ApiConnection"
+                                        }
+                                    }
+                                },
+                                "expression": {
+                                    "and": [
+                                        {
+                                            "equals": [
+                                                "@items('For_each')?['location']",
+                                                "@triggerBody()?['REGION']"
+                                            ]
+                                        },
+                                        {
+                                            "equals": [
+                                                "@items('For_each')?['name']",
+                                                "sqlserverdss@triggerBody()?['REGION']"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "runAfter": {},
+                                "type": "If"
+                            }
+                        },
+                        "else": {
+                            "actions": {
+                                "Create_or_update_a_template_deployment_2": {
+                                    "inputs": {
+                                        "body": {
+                                            "properties": {
+                                                "mode": "Incremental",
+                                                "parameters": {
+                                                    "adminPassword": {
+                                                        "value": "Dddd@123"
+                                                    },
+                                                    "adminUser": {
+                                                        "value": "DSS_ADMIN"
+                                                    },
+                                                    "bacpacUrl": {
+                                                        "value": "https://tenantdb.blob.core.windows.net/database/tenantdb.bacpac"
+                                                    },
+                                                    "databaseName": {
+                                                        "value": "@triggerBody()?['TenancyName']"
+                                                    },
+                                                    "databaseServerName": {
+                                                        "value": "sqlserverdss@{triggerBody()?['REGION']}"
+                                                    },
+                                                    "location": {
+                                                        "value": "@triggerBody()?['REGION']"
+                                                    },
+                                                    "storageAccountKey": {
+                                                        "value": "3Y+rFUClSsnG/zW0zlLrLZX4Bd03fK1HYl3Y42i9H9isrgRE8IwEtJsJiVfX6meAhMN6uoPheRu3cOYQrKL3hw=="
+                                                    }
+                                                },
+                                                "templateLink": {
+                                                    "uri": "https://raw.githubusercontent.com/PrathyushaAvula/AzureDBCreation/main/ServerAndDBdeploy.json"
+                                                }
+                                            }
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['arm']['connectionId']"
+                                            }
+                                        },
+                                        "method": "put",
+                                        "path": "/subscriptions/@{encodeURIComponent('65dc4860-69eb-499d-9162-2a0d5553c39d')}/resourcegroups/@{encodeURIComponent('Envision')}/providers/Microsoft.Resources/deployments/@{encodeURIComponent(triggerBody()?['Name'])}",
+                                        "queries": {
+                                            "wait": true,
+                                            "x-ms-api-version": "2016-06-01"
+                                        }
+                                    },
+                                    "runAfter": {},
+                                    "type": "ApiConnection"
+                                }
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "equals": [
+                                        "@items('For_each')?['location']",
+                                        "@triggerBody()?['REGION']"
+                                    ]
+                                },
+                                {
+                                    "equals": [
+                                        "@items('For_each')?['name']",
+                                        "sqlserverdss"
+                                    ]
+                                },
+                                {
+                                    "or": [
+                                        {
+                                            "equals": [
+                                                "@items('For_each')?['location']",
+                                                "@triggerBody()?['REGION']"
+                                            ]
+                                        },
+                                        {
+                                            "equals": [
+                                                "@items('For_each')?['name']",
+                                                "@triggerBody()?['REGION']"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {},
+                        "type": "If"
+                    }
+                },
+                "foreach": "@body('List_resources_by_resource_group')?['value']",
+                "runAfter": {
+                    "List_resources_by_resource_group": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Foreach"
+            },
+            "List_resources_by_resource_group": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['arm']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/subscriptions/@{encodeURIComponent('65dc4860-69eb-499d-9162-2a0d5553c39d')}/resourceGroups/@{encodeURIComponent('Envision')}/resources",
+                    "queries": {
+                        "$filter": "resourceType eq 'Microsoft.Sql/servers'",
+                        "x-ms-api-version": "2016-06-01"
+                    }
+                },
+                "runAfter": {},
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "When_an_item_is_created_(V2)": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['sql_1']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/v2/datasets/@{encodeURIComponent(encodeURIComponent('default'))},@{encodeURIComponent(encodeURIComponent('default'))}/tables/@{encodeURIComponent(encodeURIComponent('[dbo].[Tenants]'))}/onnewitems"
+                },
+                "recurrence": {
+                    "frequency": "Minute",
+                    "interval": 2
+                },
+                "splitOn": "@triggerBody()?['value']",
+                "type": "ApiConnection"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "arm": {
+                    "connectionId": "/subscriptions/65dc4860-69eb-499d-9162-2a0d5553c39d/resourceGroups/DSS/providers/Microsoft.Web/connections/arm-1",
+                    "connectionName": "arm-1",
+                    "id": "/subscriptions/65dc4860-69eb-499d-9162-2a0d5553c39d/providers/Microsoft.Web/locations/westus/managedApis/arm"
+                },
+                "sql_1": {
+                    "connectionId": "/subscriptions/65dc4860-69eb-499d-9162-2a0d5553c39d/resourceGroups/DSS/providers/Microsoft.Web/connections/sql-2",
+                    "connectionName": "sql-2",
+                    "id": "/subscriptions/65dc4860-69eb-499d-9162-2a0d5553c39d/providers/Microsoft.Web/locations/westus/managedApis/sql"
+                }
+            }
+        }
+    }
+}
