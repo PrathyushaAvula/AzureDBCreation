@@ -68,6 +68,20 @@
       },
       "resources": [
         {
+          "condition": "[parameters('allowAzureIPs')]",
+          "type": "firewallRules",
+          "apiVersion": "2020-02-02-preview",
+          "name": "AllowAllWindowsAzureIps",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+              "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+          ],
+          "properties": {
+              "endIpAddress": "0.0.0.0",
+              "startIpAddress": "0.0.0.0"
+          }
+        },
+        {
           "type": "databases",
           "apiVersion": "2020-08-01-preview",
           "name": "[parameters('sqlDBName')]",
@@ -80,20 +94,6 @@
             "[resourceId('Microsoft.Sql/servers', concat(parameters('serverName')))]"
           ],
           "resources": [
-            {
-              "condition": "[parameters('allowAzureIPs')]",
-              "type": "firewallRules",
-              "apiVersion": "2020-02-02-preview",
-              "name": "AllowAllWindowsAzureIps",
-              "location": "[parameters('location')]",
-              "dependsOn": [
-                  "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
-              ],
-              "properties": {
-                  "endIpAddress": "0.0.0.0",
-                  "startIpAddress": "0.0.0.0"
-              }
-            },
             {
               "type": "extensions",
               "apiVersion": "2014-04-01",
