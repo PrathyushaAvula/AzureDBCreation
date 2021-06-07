@@ -68,20 +68,21 @@
       },
       "resources": [
         {
-          "condition": "[parameters('allowAzureIPs')]",
-          "type": "firewallRules",
-          "apiVersion": "2020-02-02-preview",
-          "name": "AllowAllWindowsAzureIps",
+          "type": "firewallrules",
+          "apiVersion": "2015-05-01-preview",
+          "name": "AllowAllAzureIps",
           "location": "[parameters('location')]",
           "dependsOn": [
-              "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            "[parameters('serverName')]"
           ],
           "properties": {
-              "endIpAddress": "0.0.0.0",
-              "startIpAddress": "0.0.0.0"
+            "startIpAddress": "0.0.0.0",
+            "endIpAddress": "0.0.0.0"
           }
-        },
-        {
+        }
+      ],
+     },
+     {
           "type": "databases",
           "apiVersion": "2020-08-01-preview",
           "name": "[parameters('sqlDBName')]",
